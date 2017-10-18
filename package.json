@@ -1,0 +1,39 @@
+{
+  "name": "lasso-s3-writer",
+  "version": "0.0.1",
+  "description": "Lasso.js plugin for writing files to AWS S3",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run lint && npm test",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lasso-js/lasso-s3-writer.git"
+  },
+  "keywords": [
+    "lasso",
+    "s3",
+    "aws",
+    "plugin"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lasso-js/lasso-s3-writer/issues"
+  },
+  "homepage": "https://github.com/lasso-js/lasso-s3-writer#readme",
+  "dependencies": {
+    "aws-sdk": "^2.135.0"
+  },
+  "devDependencies": {
+    "codecov": "^2.3.1",
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nyc": "^11.2.1"
+  }
+}
