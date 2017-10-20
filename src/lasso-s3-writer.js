@@ -1,11 +1,12 @@
 const AWS = require('aws-sdk')
+const mime = require('mime')
 const readResource = require('./util/readResource')
 const readBundle = require('./util/readBundle')
 const calculateChecksum = require('./util/calculateChecksum')
 const getS3UrlIfExists = require('./util/getS3UrlIfExists')
 const s3WriteFile = require('./util/s3WriteFile')
 
-async function uploadFile ({ s3, bucket, file, calculateKey }) {
+async function uploadFile ({ s3, bucket, file, contentType, calculateKey }) {
   const key = (calculateKey && calculateKey(file)) || calculateChecksum(file)
   const params = { Bucket: bucket, Key: key }
 
@@ -16,7 +17,8 @@ async function uploadFile ({ s3, bucket, file, calculateKey }) {
     url = await s3WriteFile(s3, {
       ...params,
       Body: file,
-      ACL: 'public-read'
+      ACL: 'public-read',
+      ContentType: contentType
     })
   }
 
@@ -50,8 +52,9 @@ module.exports = function (pluginConfig) {
     async writeBundle (reader, lassoContext, callback) {
       try {
         const bundle = lassoContext.bundle
+        const contentType = mime.getType(bundle.contentType)
         const file = await readBundle(reader, bundle.name, readTimeout)
-        const url = await uploadFile({ s3, bucket, file, calculateKey })
+        const url = await uploadFile({ s3, bucket, file, contentType, calculateKey })
         bundle.url = url
         if (callback) return callback()
       } catch (err) {
@@ -66,8 +69,9 @@ module.exports = function (pluginConfig) {
     async writeResource (reader, lassoContext, callback) {
       try {
         const path = lassoContext.path
+        const contentType = mime.getType(path)
         const file = await readResource(reader, path, readTimeout)
-        const url = await uploadFile({ s3, bucket, file, calculateKey })
+        const url = await uploadFile({ s3, bucket, file, contentType, calculateKey })
         if (callback) return callback(null, { url })
         return { url }
       } catch (err) {
