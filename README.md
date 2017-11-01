@@ -34,3 +34,4 @@ require('lasso').configure({
 for each bundle or resource. Defaults to using `sha1` checksum.
 - `readTimeout` {Number} (optional) - The maximum amount of time to wait for a
 file to be read. Defaults to 30 seconds.
+- `logger` {Object} (optional) - Logger to write logs to. Does not log if not specified.

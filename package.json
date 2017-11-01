@@ -25,6 +25,7 @@
   "homepage": "https://github.com/lasso-js/lasso-s3-writer#readme",
   "dependencies": {
     "aws-sdk": "^2.135.0",
+    "conflogger": "^1.0.4",
     "mime": "^2.0.3"
   },
   "devDependencies": {
