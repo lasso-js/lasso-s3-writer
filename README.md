@@ -26,9 +26,9 @@ require('lasso').configure({
 
 ## Configuration Properties
 
-- `bucket` {String} - Name of the AWS S3 bucket to upload to
-- `awsConfig` {Object} (optional)- Configuration properties that are passed to `AWS.config.update(...)`
-- `s3Config` {Object} (optional) - Configuration properties that are passed to `AWS.S3(...)`
+- `bucket` {String|Object} - Name of the AWS S3 bucket to upload to or a configuration object that is passed to `s3.createBucket(...)`
+- `awsConfig` {Object} (optional)- Configuration properties that is passed to `AWS.config.update(...)`
+- `s3Config` {Object} (optional) - Configuration properties that is passed to `AWS.S3(...)`
 - `s3` {AWS.S3} (optional) - An `AWS.S3` object
 - `calculateKey` {Function} (optional) - A function to calculate a unique key
 for each bundle or resource. Defaults to using `sha1` checksum.
