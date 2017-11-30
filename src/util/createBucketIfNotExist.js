@@ -1,10 +1,14 @@
 async function bucketExists (s3, Bucket) {
   return new Promise((resolve, reject) => {
     s3.headBucket({ Bucket }, (err) => {
-      if (err && err.code === 'NotFound') {
-        resolve(false)
-      } else if (err) {
-        reject(err)
+      if (err) {
+        if (err.code === 'NotFound') {
+          resolve(false)
+        } else if (err.code === 'Forbidden') {
+          reject(new Error(`Bucket "${Bucket}" exists, but you do not have permission to access it. NOTE: S3 buckets must be unique. Ensure the bucket you specified has a unique name.`))
+        } else {
+          reject(err)
+        }
       } else {
         resolve(true)
       }
