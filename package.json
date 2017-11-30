@@ -1,6 +1,6 @@
 {
   "name": "lasso-s3-writer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Lasso.js plugin for writing files to AWS S3",
   "main": "index.js",
   "scripts": {
